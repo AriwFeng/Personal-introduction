@@ -1,0 +1,65 @@
+//设置轮播
+$(function(){
+    var index=0;//第几张图片
+    var count=3;//总的图片数量
+
+    //设置鼠标移动到轮播导航栏上
+    $('#slider_nav>li').hover(function(){
+        if(timer){clearInterval(timer)};
+        index=$('#slider_nav>li').index(this);
+        //定义一次性定时器，移动到对应的图片上
+        timer=setTimeout(function(){
+            play(index);
+            $('#slider').stop();
+        },50);
+    },function(){
+        clearInterval(timer);
+        timer=setInterval(function(){
+            play(index);
+            index++;
+            if(index==count){index=0};
+        },3000);
+    });
+   //设置鼠标移入停止轮播
+   /* $('#slider').hover(function(){
+        if(timer){clearInterval(timer)};
+    },function(){
+        clearInterval(timer);
+        timer=setInterval(function(){
+            play(index);
+            index++;
+            if(index==count){index=0};
+        },3000)
+    });*/
+    //设置自动播放
+    var timer=setInterval(function(){
+        play(index);
+        index++;
+        if(index==count){index=0};
+    },3000);
+
+});
+
+  //定义播放函数
+function play(i){
+    $('#slider>div').eq(i).animate({opacity:1},1000).css('z-index',1).
+		siblings().animate({opacity:0},1100).css('z-index',0);
+    $('#slider_nav>li').eq(i).addClass('on').siblings().removeClass('on');
+}
+
+
+
+//设置时间轴
+$('.cd-timeline-block').find('.cd-timeline-img, .cd-timeline-content').addClass('hidden_first');
+$(window).on('scroll', function(){
+	$('.cd-timeline-block').each(function(){
+			
+			if( $(this).offset().top <= $(window).scrollTop()+$(window).height() 
+				&& $(this).find('.cd-timeline-img').hasClass('hidden_first') ) {
+				/*时间轴上小图片的动画*/
+				$(this).find('.cd-timeline-img').removeClass('hidden_first').addClass('small_imgIn');
+				/*主体动画*/
+				$(this).find('.cd-timeline-content').removeClass('hidden_first').addClass('small_imgIn');
+			}
+		})	
+});
