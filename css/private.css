@@ -136,6 +136,9 @@ nav li.active,nav li:hover{
     position:absolute;
     width:100%;
 }
+#slider div img{
+    width:100%;
+}
 .hidden2{z-index:-1;}
     /*…Ë÷√¬÷≤•«–ªª≤ø∑÷*/
 #slider_nav{
@@ -454,6 +457,7 @@ nav li.active,nav li:hover{
     #maxim img{
         position: relative;
         bottom:200px;
+        width: 100%;
     }
 }
 @media only screen and (min-width: 992px )and (max-width: 1200px) {
